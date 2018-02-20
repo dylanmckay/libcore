@@ -1,0 +1,776 @@
+Args: ./bin/llc -march=avr -mcpu=atmega328p bugpoint-reduced-simplified.ll -debug -o /dev/null 
+
+Features:
+CPU:atmega328p
+
+	discovered a new reachable node %start
+	discovered a new reachable node %start
+	discovered a new reachable node %start
+MergeICmpsPass: _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E
+	discovered a new reachable node %start
+---- Branch Probability Info : _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E ----
+
+Computing probabilities for start
+
+block-frequency: _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E
+===============================================================================================
+reverse-post-order-traversal
+ - 0: start
+loop-detection
+compute-mass-in-function
+ - node: start
+  => mass:  ffffffffffffffff
+float-to-int: min = 1.0, max = 1.0, factor = 8.0
+ - start: float = 1.0, scaled = 8.0, int = 8
+block-frequency-info: _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E
+ - start: float = 1.0, int = 8
+
+********** Begin Constant Hoisting **********
+********** Function: _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E
+********** End Constant Hoisting **********
+	discovered a new reachable node %start
+---- Branch Probability Info : _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E ----
+
+Computing probabilities for start
+
+block-frequency: _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E
+===============================================================================================
+reverse-post-order-traversal
+ - 0: start
+loop-detection
+compute-mass-in-function
+ - node: start
+  => mass:  ffffffffffffffff
+float-to-int: min = 1.0, max = 1.0, factor = 8.0
+ - start: float = 1.0, scaled = 8.0, int = 8
+block-frequency-info: _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E
+ - start: float = 1.0, int = 8
+
+[SafeStack] Function: _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E
+[SafeStack]     safestack is not requested for this function
+	discovered a new reachable node %start
+	discovered a new reachable node %start
+---- Branch Probability Info : _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E ----
+
+Computing probabilities for start
+
+
+
+=== _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E
+Creating new node: t2: i16,ch = CopyFromReg t0, Register:i16 %0
+Creating new node: t4: i16,ch = CopyFromReg t0, Register:i16 %1
+Creating constant: t5: i8 = Constant<0>
+Creating constant: t6: i32 = Constant<0>
+Creating new node: t7: i8,i32 = merge_values Constant:i8<0>, Constant:i32<0>
+Creating constant: t8: i16 = Constant<1>
+Creating new node: t9: i16 = extract_element t7:1, Constant:i16<1>
+Creating constant: t10: i16 = Constant<0>
+Creating new node: t11: i16 = extract_element t7:1, Constant:i16<0>
+Creating new node: t13: ch,glue = CopyToReg t0, Register:i8 $r21r20, t7
+Creating new node: t16: ch,glue = CopyToReg t13, Register:i16 $r23r22, t11, t13:1
+Creating new node: t18: ch,glue = CopyToReg t16, Register:i16 $r24, t9, t16:1
+Creating new node: t20: ch = RET_FLAG t18, Register:i16 $r21r20, Register:i16 $r23r22, Register:i8 $r24, t18:1
+Initial selection DAG: %bb.0 '_ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E:start'
+SelectionDAG has 21 nodes:
+  t0: ch = EntryToken
+  t2: i16,ch = CopyFromReg t0, Register:i16 %0
+  t4: i16,ch = CopyFromReg t0, Register:i16 %1
+  t7: i8,i32 = merge_values Constant:i8<0>, Constant:i32<0>
+  t13: ch,glue = CopyToReg t0, Register:i8 $r21r20, t7
+    t11: i16 = extract_element t7:1, Constant:i16<0>
+  t16: ch,glue = CopyToReg t13, Register:i16 $r23r22, t11, t13:1
+    t9: i16 = extract_element t7:1, Constant:i16<1>
+  t18: ch,glue = CopyToReg t16, Register:i16 $r24, t9, t16:1
+  t20: ch = RET_FLAG t18, Register:i16 $r21r20, Register:i16 $r23r22, Register:i8 $r24, t18:1
+
+
+
+Combining: t20: ch = RET_FLAG t18, Register:i16 $r21r20, Register:i16 $r23r22, Register:i8 $r24, t18:1
+
+Combining: t19: i8 = Register $r24
+
+Combining: t18: ch,glue = CopyToReg t16, Register:i16 $r24, t9, t16:1
+
+Combining: t17: i16 = Register $r24
+
+Combining: t16: ch,glue = CopyToReg t13, Register:i16 $r23r22, t11, t13:1
+
+Combining: t15: i16 = Register $r23r22
+
+Combining: t14: i16 = Register $r21r20
+
+Combining: t13: ch,glue = CopyToReg t0, Register:i8 $r21r20, t7
+
+Combining: t12: i8 = Register $r21r20
+
+Combining: t11: i16 = extract_element t7:1, Constant:i16<0>
+
+Combining: t10: i16 = Constant<0>
+
+Combining: t9: i16 = extract_element t7:1, Constant:i16<1>
+
+Combining: t8: i16 = Constant<1>
+
+Combining: t7: i8,i32 = merge_values Constant:i8<0>, Constant:i32<0>
+
+Combining: t9: i16 = extract_element Constant:i32<0>, Constant:i16<1>
+
+Combining: t11: i16 = extract_element Constant:i32<0>, Constant:i16<0>
+
+Combining: t13: ch,glue = CopyToReg t0, Register:i8 $r21r20, Constant:i8<0>
+
+Combining: t6: i32 = Constant<0>
+
+Combining: t5: i8 = Constant<0>
+
+Combining: t0: ch = EntryToken
+Optimized lowered selection DAG: %bb.0 '_ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E:start'
+SelectionDAG has 16 nodes:
+    t0: ch = EntryToken
+  t13: ch,glue = CopyToReg t0, Register:i8 $r21r20, Constant:i8<0>
+    t11: i16 = extract_element Constant:i32<0>, Constant:i16<0>
+  t16: ch,glue = CopyToReg t13, Register:i16 $r23r22, t11, t13:1
+    t9: i16 = extract_element Constant:i32<0>, Constant:i16<1>
+  t18: ch,glue = CopyToReg t16, Register:i16 $r24, t9, t16:1
+  t20: ch = RET_FLAG t18, Register:i16 $r21r20, Register:i16 $r23r22, Register:i8 $r24, t18:1
+
+
+Legalizing node: t19: i8 = Register $r24
+Ignoring node results
+Legally typed node: t19: i8 = Register $r24
+
+Legalizing node: t17: i16 = Register $r24
+Ignoring node results
+Legally typed node: t17: i16 = Register $r24
+
+Legalizing node: t15: i16 = Register $r23r22
+Ignoring node results
+Legally typed node: t15: i16 = Register $r23r22
+
+Legalizing node: t14: i16 = Register $r21r20
+Ignoring node results
+Legally typed node: t14: i16 = Register $r21r20
+
+Legalizing node: t12: i8 = Register $r21r20
+Ignoring node results
+Legally typed node: t12: i8 = Register $r21r20
+
+Legalizing node: t10: i16 = Constant<0>
+Analyzing result type: i16
+Legal result type
+Legally typed node: t10: i16 = Constant<0>
+
+Legalizing node: t8: i16 = Constant<1>
+Analyzing result type: i16
+Legal result type
+Legally typed node: t8: i16 = Constant<1>
+
+Legalizing node: t6: i32 = Constant<0>
+Analyzing result type: i32
+Expand integer result: t6: i32 = Constant<0>
+
+Legalizing node: t11: i16 = extract_element Constant:i32<0>, Constant:i16<0>
+Analyzing result type: i16
+Legal result type
+Analyzing operand: t6: i32 = Constant<0>
+Expand integer operand: t11: i16 = extract_element Constant:i32<0>, Constant:i16<0>
+
+Legalizing node: t9: i16 = extract_element Constant:i32<0>, Constant:i16<1>
+Analyzing result type: i16
+Legal result type
+Analyzing operand: t6: i32 = Constant<0>
+Expand integer operand: t9: i16 = extract_element Constant:i32<0>, Constant:i16<1>
+
+Legalizing node: t5: i8 = Constant<0>
+Analyzing result type: i8
+Legal result type
+Legally typed node: t5: i8 = Constant<0>
+
+Legalizing node: t0: ch = EntryToken
+Analyzing result type: ch
+Legal result type
+Legally typed node: t0: ch = EntryToken
+
+Legalizing node: t13: ch,glue = CopyToReg t0, Register:i8 $r21r20, Constant:i8<0>
+Analyzing result type: ch
+Legal result type
+Analyzing result type: glue
+Legal result type
+Analyzing operand: t0: ch = EntryToken
+Legal operand
+Analyzing operand: t5: i8 = Constant<0>
+Legal operand
+Legally typed node: t13: ch,glue = CopyToReg t0, Register:i8 $r21r20, Constant:i8<0>
+
+Legalizing node: t16: ch,glue = CopyToReg t13, Register:i16 $r23r22, Constant:i16<0>, t13:1
+Analyzing result type: ch
+Legal result type
+Analyzing result type: glue
+Legal result type
+Analyzing operand: t13: ch,glue = CopyToReg t0, Register:i8 $r21r20, Constant:i8<0>
+Legal operand
+Analyzing operand: t10: i16 = Constant<0>
+Legal operand
+Analyzing operand: t13: ch,glue = CopyToReg t0, Register:i8 $r21r20, Constant:i8<0>
+Legal operand
+Legally typed node: t16: ch,glue = CopyToReg t13, Register:i16 $r23r22, Constant:i16<0>, t13:1
+
+Legalizing node: t18: ch,glue = CopyToReg t16, Register:i16 $r24, Constant:i16<0>, t16:1
+Analyzing result type: ch
+Legal result type
+Analyzing result type: glue
+Legal result type
+Analyzing operand: t16: ch,glue = CopyToReg t13, Register:i16 $r23r22, Constant:i16<0>, t13:1
+Legal operand
+Analyzing operand: t10: i16 = Constant<0>
+Legal operand
+Analyzing operand: t16: ch,glue = CopyToReg t13, Register:i16 $r23r22, Constant:i16<0>, t13:1
+Legal operand
+Legally typed node: t18: ch,glue = CopyToReg t16, Register:i16 $r24, Constant:i16<0>, t16:1
+
+Legalizing node: t20: ch = RET_FLAG t18, Register:i16 $r21r20, Register:i16 $r23r22, Register:i8 $r24, t18:1
+Analyzing result type: ch
+Legal result type
+Analyzing operand: t18: ch,glue = CopyToReg t16, Register:i16 $r24, Constant:i16<0>, t16:1
+Legal operand
+Analyzing operand: t18: ch,glue = CopyToReg t16, Register:i16 $r24, Constant:i16<0>, t16:1
+Legal operand
+Legally typed node: t20: ch = RET_FLAG t18, Register:i16 $r21r20, Register:i16 $r23r22, Register:i8 $r24, t18:1
+
+Legalizing node: t65535: ch = handlenode t20
+Analyzing result type: ch
+Legal result type
+Analyzing operand: t20: ch = RET_FLAG t18, Register:i16 $r21r20, Register:i16 $r23r22, Register:i8 $r24, t18:1
+Legal operand
+Legally typed node: t65535: ch = handlenode t20
+
+Type-legalized selection DAG: %bb.0 '_ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E:start'
+SelectionDAG has 12 nodes:
+    t0: ch = EntryToken
+  t13: ch,glue = CopyToReg t0, Register:i8 $r21r20, Constant:i8<0>
+  t16: ch,glue = CopyToReg t13, Register:i16 $r23r22, Constant:i16<0>, t13:1
+  t18: ch,glue = CopyToReg t16, Register:i16 $r24, Constant:i16<0>, t16:1
+  t20: ch = RET_FLAG t18, Register:i16 $r21r20, Register:i16 $r23r22, Register:i8 $r24, t18:1
+
+
+
+Combining: t20: ch = RET_FLAG t18, Register:i16 $r21r20, Register:i16 $r23r22, Register:i8 $r24, t18:1
+
+Combining: t19: i8 = Register $r24
+
+Combining: t18: ch,glue = CopyToReg t16, Register:i16 $r24, Constant:i16<0>, t16:1
+
+Combining: t17: i16 = Register $r24
+
+Combining: t16: ch,glue = CopyToReg t13, Register:i16 $r23r22, Constant:i16<0>, t13:1
+
+Combining: t15: i16 = Register $r23r22
+
+Combining: t14: i16 = Register $r21r20
+
+Combining: t13: ch,glue = CopyToReg t0, Register:i8 $r21r20, Constant:i8<0>
+
+Combining: t12: i8 = Register $r21r20
+
+Combining: t10: i16 = Constant<0>
+
+Combining: t5: i8 = Constant<0>
+
+Combining: t0: ch = EntryToken
+Optimized type-legalized selection DAG: %bb.0 '_ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E:start'
+SelectionDAG has 12 nodes:
+    t0: ch = EntryToken
+  t13: ch,glue = CopyToReg t0, Register:i8 $r21r20, Constant:i8<0>
+  t16: ch,glue = CopyToReg t13, Register:i16 $r23r22, Constant:i16<0>, t13:1
+  t18: ch,glue = CopyToReg t16, Register:i16 $r24, Constant:i16<0>, t16:1
+  t20: ch = RET_FLAG t18, Register:i16 $r21r20, Register:i16 $r23r22, Register:i8 $r24, t18:1
+
+
+
+Legalizing: t20: ch = RET_FLAG t18, Register:i16 $r21r20, Register:i16 $r23r22, Register:i8 $r24, t18:1
+Legal node: nothing to do
+
+Legalizing: t18: ch,glue = CopyToReg t16, Register:i16 $r24, Constant:i16<0>, t16:1
+Legal node: nothing to do
+
+Legalizing: t16: ch,glue = CopyToReg t13, Register:i16 $r23r22, Constant:i16<0>, t13:1
+Legal node: nothing to do
+
+Legalizing: t13: ch,glue = CopyToReg t0, Register:i8 $r21r20, Constant:i8<0>
+Legal node: nothing to do
+
+Legalizing: t19: i8 = Register $r24
+
+Legalizing: t17: i16 = Register $r24
+
+Legalizing: t15: i16 = Register $r23r22
+
+Legalizing: t14: i16 = Register $r21r20
+
+Legalizing: t12: i8 = Register $r21r20
+
+Legalizing: t10: i16 = Constant<0>
+Legal node: nothing to do
+
+Legalizing: t5: i8 = Constant<0>
+Legal node: nothing to do
+
+Legalizing: t0: ch = EntryToken
+Legal node: nothing to do
+Legalized selection DAG: %bb.0 '_ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E:start'
+SelectionDAG has 12 nodes:
+    t0: ch = EntryToken
+  t13: ch,glue = CopyToReg t0, Register:i8 $r21r20, Constant:i8<0>
+  t16: ch,glue = CopyToReg t13, Register:i16 $r23r22, Constant:i16<0>, t13:1
+  t18: ch,glue = CopyToReg t16, Register:i16 $r24, Constant:i16<0>, t16:1
+  t20: ch = RET_FLAG t18, Register:i16 $r21r20, Register:i16 $r23r22, Register:i8 $r24, t18:1
+
+
+
+Legalizing: t20: ch = RET_FLAG t18, Register:i16 $r21r20, Register:i16 $r23r22, Register:i8 $r24, t18:1
+Legal node: nothing to do
+
+Combining: t20: ch = RET_FLAG t18, Register:i16 $r21r20, Register:i16 $r23r22, Register:i8 $r24, t18:1
+
+Legalizing: t18: ch,glue = CopyToReg t16, Register:i16 $r24, Constant:i16<0>, t16:1
+Legal node: nothing to do
+
+Combining: t18: ch,glue = CopyToReg t16, Register:i16 $r24, Constant:i16<0>, t16:1
+
+Legalizing: t16: ch,glue = CopyToReg t13, Register:i16 $r23r22, Constant:i16<0>, t13:1
+Legal node: nothing to do
+
+Combining: t16: ch,glue = CopyToReg t13, Register:i16 $r23r22, Constant:i16<0>, t13:1
+
+Legalizing: t13: ch,glue = CopyToReg t0, Register:i8 $r21r20, Constant:i8<0>
+Legal node: nothing to do
+
+Combining: t13: ch,glue = CopyToReg t0, Register:i8 $r21r20, Constant:i8<0>
+
+Legalizing: t19: i8 = Register $r24
+
+Combining: t19: i8 = Register $r24
+
+Legalizing: t17: i16 = Register $r24
+
+Combining: t17: i16 = Register $r24
+
+Legalizing: t15: i16 = Register $r23r22
+
+Combining: t15: i16 = Register $r23r22
+
+Legalizing: t14: i16 = Register $r21r20
+
+Combining: t14: i16 = Register $r21r20
+
+Legalizing: t12: i8 = Register $r21r20
+
+Combining: t12: i8 = Register $r21r20
+
+Legalizing: t10: i16 = Constant<0>
+Legal node: nothing to do
+
+Combining: t10: i16 = Constant<0>
+
+Legalizing: t5: i8 = Constant<0>
+Legal node: nothing to do
+
+Combining: t5: i8 = Constant<0>
+
+Legalizing: t0: ch = EntryToken
+Legal node: nothing to do
+
+Combining: t0: ch = EntryToken
+Optimized legalized selection DAG: %bb.0 '_ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E:start'
+SelectionDAG has 12 nodes:
+    t0: ch = EntryToken
+  t13: ch,glue = CopyToReg t0, Register:i8 $r21r20, Constant:i8<0>
+  t16: ch,glue = CopyToReg t13, Register:i16 $r23r22, Constant:i16<0>, t13:1
+  t18: ch,glue = CopyToReg t16, Register:i16 $r24, Constant:i16<0>, t16:1
+  t20: ch = RET_FLAG t18, Register:i16 $r21r20, Register:i16 $r23r22, Register:i8 $r24, t18:1
+
+
+===== Instruction selection begins: %bb.0 'start'
+
+ISEL: Starting selection on root node: t20: ch = RET_FLAG t18, Register:i16 $r21r20, Register:i16 $r23r22, Register:i8 $r24, t18:1
+ISEL: Starting pattern match
+  Morphed node: t20: ch = RET Register:i16 $r21r20, Register:i16 $r23r22, Register:i8 $r24, t18, t18:1
+ISEL: Match complete!
+
+ISEL: Starting selection on root node: t18: ch,glue = CopyToReg t16, Register:i16 $r24, Constant:i16<0>, t16:1
+
+ISEL: Starting selection on root node: t16: ch,glue = CopyToReg t13, Register:i16 $r23r22, Constant:i16<0>, t13:1
+
+ISEL: Starting selection on root node: t13: ch,glue = CopyToReg t0, Register:i8 $r21r20, Constant:i8<0>
+
+ISEL: Starting selection on root node: t19: i8 = Register $r24
+
+ISEL: Starting selection on root node: t17: i16 = Register $r24
+
+ISEL: Starting selection on root node: t15: i16 = Register $r23r22
+
+ISEL: Starting selection on root node: t14: i16 = Register $r21r20
+
+ISEL: Starting selection on root node: t12: i8 = Register $r21r20
+
+ISEL: Starting selection on root node: t10: i16 = Constant<0>
+ISEL: Starting pattern match
+  Initial Opcode index to 2276
+  TypeSwitch[i16] from 2277 to 2291
+Creating constant: t21: i16 = TargetConstant<0>
+  Morphed node: t10: i16 = LDIWRdK TargetConstant:i16<0>
+ISEL: Match complete!
+
+ISEL: Starting selection on root node: t5: i8 = Constant<0>
+ISEL: Starting pattern match
+  Initial Opcode index to 2276
+  TypeSwitch[i8] from 2277 to 2280
+Creating constant: t22: i8 = TargetConstant<0>
+  Morphed node: t5: i8 = LDIRdK TargetConstant:i8<0>
+ISEL: Match complete!
+
+ISEL: Starting selection on root node: t0: ch = EntryToken
+
+===== Instruction selection ends:
+Selected selection DAG: %bb.0 '_ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E:start'
+SelectionDAG has 14 nodes:
+  t10: i16 = LDIWRdK TargetConstant:i16<0>
+    t0: ch = EntryToken
+    t5: i8 = LDIRdK TargetConstant:i8<0>
+  t13: ch,glue = CopyToReg t0, Register:i8 $r21r20, t5
+  t16: ch,glue = CopyToReg t13, Register:i16 $r23r22, t10, t13:1
+  t18: ch,glue = CopyToReg t16, Register:i16 $r24, t10, t16:1
+  t20: ch = RET Register:i16 $r21r20, Register:i16 $r23r22, Register:i8 $r24, t18, t18:1
+
+
+********** List Scheduling %bb.0 'start' **********
+SU(0): t20: ch = RET Register:i16 $r21r20, Register:i16 $r23r22, Register:i8 $r24, t18, t18:1
+
+    t13: ch,glue = CopyToReg t0, Register:i8 $r21r20, t5
+
+    t16: ch,glue = CopyToReg t13, Register:i16 $r23r22, t10, t13:1
+
+    t18: ch,glue = CopyToReg t16, Register:i16 $r24, t10, t16:1
+
+  # preds left       : 2
+  # succs left       : 0
+  # rdefs left       : 0
+  Latency            : 1
+  Depth              : 1
+  Height             : 0
+  Predecessors:
+    SU(1): Data Latency=1
+    SU(2): Data Latency=1
+SU(1): t10: i16 = LDIWRdK TargetConstant:i16<0>
+
+  # preds left       : 0
+  # succs left       : 1
+  # rdefs left       : 1
+  Latency            : 1
+  Depth              : 0
+  Height             : 1
+  Successors:
+    SU(0): Data Latency=1
+SU(2): t5: i8 = LDIRdK TargetConstant:i8<0>
+
+  # preds left       : 0
+  # succs left       : 1
+  # rdefs left       : 1
+  Latency            : 1
+  Depth              : 0
+  Height             : 1
+  Successors:
+    SU(0): Data Latency=1
+
+Examining Available:
+Height 0: SU(0): t20: ch = RET Register:i16 $r21r20, Register:i16 $r23r22, Register:i8 $r24, t18, t18:1
+
+    t13: ch,glue = CopyToReg t0, Register:i8 $r21r20, t5
+
+    t16: ch,glue = CopyToReg t13, Register:i16 $r23r22, t10, t13:1
+
+    t18: ch,glue = CopyToReg t16, Register:i16 $r24, t10, t16:1
+
+
+*** Scheduling [0]: SU(0): t20: ch = RET Register:i16 $r21r20, Register:i16 $r23r22, Register:i8 $r24, t18, t18:1
+
+    t13: ch,glue = CopyToReg t0, Register:i8 $r21r20, t5
+
+    t16: ch,glue = CopyToReg t13, Register:i16 $r23r22, t10, t13:1
+
+    t18: ch,glue = CopyToReg t16, Register:i16 $r24, t10, t16:1
+
+
+Examining Available:
+Height 1: SU(1): t10: i16 = LDIWRdK TargetConstant:i16<0>
+
+Height 1: SU(2): t5: i8 = LDIRdK TargetConstant:i8<0>
+
+
+*** Scheduling [1]: SU(1): t10: i16 = LDIWRdK TargetConstant:i16<0>
+
+
+Examining Available:
+Height 1: SU(2): t5: i8 = LDIRdK TargetConstant:i8<0>
+
+
+*** Scheduling [2]: SU(2): t5: i8 = LDIRdK TargetConstant:i8<0>
+
+*** Final schedule ***
+SU(2): t5: i8 = LDIRdK TargetConstant:i8<0>
+
+SU(1): t10: i16 = LDIWRdK TargetConstant:i16<0>
+
+SU(0): t20: ch = RET Register:i16 $r21r20, Register:i16 $r23r22, Register:i8 $r24, t18, t18:1
+
+    t13: ch,glue = CopyToReg t0, Register:i8 $r21r20, t5
+
+    t16: ch,glue = CopyToReg t13, Register:i16 $r23r22, t10, t13:1
+
+    t18: ch,glue = CopyToReg t16, Register:i16 $r24, t10, t16:1
+
+
+Total amount of phi nodes to update: 0
+*** MachineFunction at end of ISel ***
+# Machine code for function _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E: IsSSA, TracksLiveness
+
+bb.0.start:
+  %2:ld8 = LDIRdK 0
+  %3:dldregs = LDIWRdK 0
+  $r21r20 = COPY %2
+  $r23r22 = COPY %3
+  $r24 = COPY %3
+  RET implicit $r21r20, implicit $r23r22, implicit $r24
+
+# End machine code for function _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E.
+
+# Machine code for function _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E: IsSSA, TracksLiveness
+
+0B	bb.0.start:
+16B	  %2:ld8 = LDIRdK 0
+32B	  %3:dldregs = LDIWRdK 0
+48B	  $r21r20 = COPY %2
+64B	  $r23r22 = COPY %3
+80B	  $r24 = COPY %3
+96B	  RET implicit $r21r20, implicit $r23r22, implicit $r24
+
+# End machine code for function _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E.
+
+********** Stack Coloring **********
+********** Function: _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E
+	discovered a new reachable node %bb.0
+******** Pre-regalloc Machine LICM: _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E ********
+Entering: start
+Exiting: start
+		Looking for trivial roots
+Found a new trivial root: %bb.0
+Last visited node: %bb.0
+		Looking for non-trivial roots
+Total: 1, Num: 2
+Discovered CFG nodes:
+0: nullptr
+1: nullptr
+2: %bb.0
+Found roots: %bb.0 
+	discovered a new reachable node nullptr
+	discovered a new reachable node %bb.0
+
+block-frequency: _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E
+===============================================================================================
+reverse-post-order-traversal
+ - 0: BB0[start]
+loop-detection
+compute-mass-in-function
+ - node: BB0[start]
+  => mass:  ffffffffffffffff
+float-to-int: min = 1.0, max = 1.0, factor = 8.0
+ - BB0[start]: float = 1.0, scaled = 8.0, int = 8
+block-frequency-info: _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E
+ - BB0[start]: float = 1.0, int = 8
+
+******** Machine Sinking ********
+********** PEEPHOLE OPTIMIZER **********
+********** Function: _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E
+Skipping Detect dead lanes pass
+********** PROCESS IMPLICIT DEFS **********
+********** Function: _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E
+	discovered a new reachable node %bb.0
+********** REWRITING TWO-ADDR INSTRS **********
+********** Function: _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E
+# Machine code for function _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E: NoPHIs, TracksLiveness
+
+0B	bb.0.start:
+16B	  %2:ld8 = LDIRdK 0
+32B	  %3:dldregs = LDIWRdK 0
+48B	  $r21r20 = COPY killed %2
+64B	  $r23r22 = COPY %3
+80B	  $r24 = COPY killed %3
+96B	  RET implicit killed $r21r20, implicit killed $r23r22, implicit killed $r24
+
+# End machine code for function _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E.
+
+Computing live-in reg-units in ABI blocks.
+Created 0 new intervals.
+********** INTERVALS **********
+%2 [16r,48r:0)  0@16r weight:0.000000e+00
+%3 [32r,80r:0)  0@32r weight:0.000000e+00
+RegMasks:
+********** MACHINEINSTRS **********
+# Machine code for function _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E: NoPHIs, TracksLiveness
+
+0B	bb.0.start:
+16B	  %2:ld8 = LDIRdK 0
+32B	  %3:dldregs = LDIWRdK 0
+48B	  $r21r20 = COPY %2
+64B	  $r23r22 = COPY %3
+80B	  $r24 = COPY %3
+96B	  RET implicit killed $r21r20, implicit killed $r23r22, implicit killed $r24
+
+# End machine code for function _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E.
+
+********** SIMPLE REGISTER COALESCING **********
+********** Function: _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E
+********** JOINING INTERVALS ***********
+start:
+48B	$r21r20 = COPY %2:ld8	Not coalescable.
+64B	$r23r22 = COPY %3:dldregs	Considering merging %3 with $r23r22
+	Can only merge into reserved registers.
+80B	$r24 = COPY %3:dldregs	Not coalescable.
+Trying to inflate 0 regs.
+********** INTERVALS **********
+%2 [16r,48r:0)  0@16r weight:0.000000e+00
+%3 [32r,80r:0)  0@32r weight:0.000000e+00
+RegMasks:
+********** MACHINEINSTRS **********
+# Machine code for function _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E: NoPHIs, TracksLiveness
+
+0B	bb.0.start:
+16B	  %2:ld8 = LDIRdK 0
+32B	  %3:dldregs = LDIWRdK 0
+48B	  $r21r20 = COPY %2
+64B	  $r23r22 = COPY %3
+80B	  $r24 = COPY %3
+96B	  RET implicit killed $r21r20, implicit killed $r23r22, implicit killed $r24
+
+# End machine code for function _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E.
+
+
+block-frequency: _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E
+===============================================================================================
+reverse-post-order-traversal
+ - 0: BB0[start]
+loop-detection
+compute-mass-in-function
+ - node: BB0[start]
+  => mass:  ffffffffffffffff
+float-to-int: min = 1.0, max = 1.0, factor = 8.0
+ - BB0[start]: float = 1.0, scaled = 8.0, int = 8
+block-frequency-info: _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E
+ - BB0[start]: float = 1.0, int = 8
+
+********** GREEDY REGISTER ALLOCATION **********
+********** Function: _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E
+********** Compute Spill Weights **********
+********** Function: _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E
+********** INTERVALS **********
+%2 [16r,48r:0)  0@16r weight:2.314815e-03
+%3 [32r,80r:0)  0@32r weight:3.381696e-03
+RegMasks:
+********** MACHINEINSTRS **********
+# Machine code for function _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E: NoPHIs, TracksLiveness
+
+0B	bb.0.start:
+16B	  %2:ld8 = LDIRdK 0
+32B	  %3:dldregs = LDIWRdK 0
+48B	  $r21r20 = COPY %2
+64B	  $r23r22 = COPY %3
+80B	  $r24 = COPY %3
+96B	  RET implicit killed $r21r20, implicit killed $r23r22, implicit killed $r24
+
+# End machine code for function _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E.
+
+
+selectOrSplit DLDREGS:%3 [32r,80r:0)  0@32r weight:3.381696e-03 w=3.381696e-03
+AllocationOrder(DREGS) = [ $r25r24 $r19r18 $r21r20 $r23r22 $r31r30 $r27r26 $r17r16 $r15r14 $r13r12 $r11r10 $r9r8 $r7r6 $r5r4 $r3r2 ]
+AllocationOrder(DLDREGS) = [ $r25r24 $r19r18 $r21r20 $r23r22 $r31r30 $r27r26 $r17r16 ] (sub-class)
+hints: $r23r22
+assigning %3 to $r23r22: R22 [32r,80r:0)  0@32r R23 [32r,80r:0)  0@32r
+
+selectOrSplit LD8:%2 [16r,48r:0)  0@16r weight:2.314815e-03 w=2.314815e-03
+AllocationOrder(GPR8) = [ $r24 $r25 $r18 $r19 $r20 $r21 $r22 $r23 $r30 $r31 $r26 $r27 $r17 $r16 $r15 $r14 $r13 $r12 $r11 $r10 $r9 $r8 $r7 $r6 $r5 $r4 $r3 $r2 ]
+AllocationOrder(LD8) = [ $r24 $r25 $r18 $r19 $r20 $r21 $r22 $r23 $r30 $r31 $r26 $r27 $r17 $r16 ] (sub-class)
+assigning %2 to $r24: R24 [16r,48r:0)  0@16r
+********** REWRITE VIRTUAL REGISTERS **********
+********** Function: _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E
+********** REGISTER MAP **********
+[%2 -> $r24] LD8
+[%3 -> $r23r22] DLDREGS
+
+0B	bb.0.start:
+16B	  %2:ld8 = LDIRdK 0
+32B	  %3:dldregs = LDIWRdK 0
+48B	  $r21r20 = COPY killed %2:ld8
+64B	  $r23r22 = COPY %3:dldregs
+80B	  $r24 = COPY %3:dldregs
+96B	  RET implicit killed $r21r20, implicit $r23r22, implicit $r24
+> renamable $r24 = LDIRdK 0> renamable $r23r22 = LDIWRdK 0> $r21r20 = COPY killed renamable $r24> $r23r22 = COPY renamable $r23r22Identity copy: $r23r22 = COPY renamable $r23r22  deleted.
+> $r24 = COPY renamable $r23r22> RET implicit killed $r21r20, implicit $r23r22, implicit $r24********** Stack Slot Coloring **********
+********** Function: _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E
+******** Post-regalloc Machine LICM: _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E ********
+
+block-frequency: _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E
+===============================================================================================
+reverse-post-order-traversal
+ - 0: BB0[start]
+loop-detection
+compute-mass-in-function
+ - node: BB0[start]
+  => mass:  ffffffffffffffff
+float-to-int: min = 1.0, max = 1.0, factor = 8.0
+ - BB0[start]: float = 1.0, scaled = 8.0, int = 8
+block-frequency-info: _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E
+ - BB0[start]: float = 1.0, int = 8
+
+		Looking for trivial roots
+Found a new trivial root: %bb.0
+Last visited node: %bb.0
+		Looking for non-trivial roots
+Total: 1, Num: 2
+Discovered CFG nodes:
+0: nullptr
+1: nullptr
+2: %bb.0
+Found roots: %bb.0 
+	discovered a new reachable node nullptr
+	discovered a new reachable node %bb.0
+MCP: CopyPropagateBlock start
+MCP: Copy is a deletion candidate:   $r21r20 = COPY killed renamable $r24MCP: Copy is a deletion candidate:   $r24 = COPY renamable $r23r22MCP: Copy is used - not dead:   $r21r20 = COPY killed renamable $r24MCP: Copy is used - not dead:   $r21r20 = COPY killed renamable $r24MCP: Copy is used - not dead:   $r21r20 = COPY killed renamable $r24MCP: Copy is used - not dead:   $r21r20 = COPY killed renamable $r24MCP: Copy is used - not dead:   $r24 = COPY renamable $r23r22Machine Function
+********** EXPANDING POST-RA PSEUDO INSTRS **********
+********** Function: _ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E
+real copy:   $r21r20 = COPY killed renamable $r24Impossible reg-to-reg copy
+UNREACHABLE executed at /home/dylan/projects/llvm-project/llvm/lib/Target/AVR/AVRInstrInfo.cpp:75!
+#0 0x00007fa5f7e32cc6 llvm::sys::PrintStackTrace(llvm::raw_ostream&) /home/dylan/projects/llvm-project/llvm/lib/Support/Unix/Signals.inc:398:11
+#1 0x00007fa5f7e32ec9 PrintStackTraceSignalHandler(void*) /home/dylan/projects/llvm-project/llvm/lib/Support/Unix/Signals.inc:462:1
+#2 0x00007fa5f7e31260 llvm::sys::RunSignalHandlers() /home/dylan/projects/llvm-project/llvm/lib/Support/Signals.cpp:0:5
+#3 0x00007fa5f7e332ba SignalHandler(int) /home/dylan/projects/llvm-project/llvm/lib/Support/Unix/Signals.inc:0:3
+#4 0x00007fa5f6d10dd0 __restore_rt (/usr/lib/libpthread.so.0+0x11dd0)
+#5 0x00007fa5f6092860 __GI_raise (/usr/lib/libc.so.6+0x34860)
+#6 0x00007fa5f6093ec9 __GI_abort (/usr/lib/libc.so.6+0x35ec9)
+#7 0x00007fa5f7d311f0 llvm::install_out_of_memory_new_handler() /home/dylan/projects/llvm-project/llvm/lib/Support/ErrorHandling.cpp:193:0
+#8 0x00007fa5fcd71599 llvm::AVRInstrInfo::copyPhysReg(llvm::MachineBasicBlock&, llvm::MachineInstrBundleIterator<llvm::MachineInstr, false>, llvm::DebugLoc const&, unsigned int, unsigned int, bool) const /home/dylan/projects/llvm-project/llvm/lib/Target/AVR/AVRInstrInfo.cpp:0:7
+#9 0x00007fa5fa787d3b (anonymous namespace)::ExpandPostRA::LowerCopy(llvm::MachineInstr*) /home/dylan/projects/llvm-project/llvm/lib/CodeGen/ExpandPostRAPseudos.cpp:166:7
+#10 0x00007fa5fa787189 (anonymous namespace)::ExpandPostRA::runOnMachineFunction(llvm::MachineFunction&) /home/dylan/projects/llvm-project/llvm/lib/CodeGen/ExpandPostRAPseudos.cpp:212:23
+#11 0x00007fa5fa96ae61 llvm::MachineFunctionPass::runOnFunction(llvm::Function&) /home/dylan/projects/llvm-project/llvm/lib/CodeGen/MachineFunctionPass.cpp:62:8
+#12 0x00007fa5f9ea9dff llvm::FPPassManager::runOnFunction(llvm::Function&) /home/dylan/projects/llvm-project/llvm/lib/IR/LegacyPassManager.cpp:1520:27
+#13 0x00007fa5f9eaa152 llvm::FPPassManager::runOnModule(llvm::Module&) /home/dylan/projects/llvm-project/llvm/lib/IR/LegacyPassManager.cpp:1541:16
+#14 0x00007fa5f9eaa9b0 (anonymous namespace)::MPPassManager::runOnModule(llvm::Module&) /home/dylan/projects/llvm-project/llvm/lib/IR/LegacyPassManager.cpp:1597:27
+#15 0x00007fa5f9eaa436 llvm::legacy::PassManagerImpl::run(llvm::Module&) /home/dylan/projects/llvm-project/llvm/lib/IR/LegacyPassManager.cpp:1700:16
+#16 0x00007fa5f9eaaf21 llvm::legacy::PassManager::run(llvm::Module&) /home/dylan/projects/llvm-project/llvm/lib/IR/LegacyPassManager.cpp:1731:3
+#17 0x000055a8df21d34a compileModule(char**, llvm::LLVMContext&) /home/dylan/projects/llvm-project/llvm/tools/llc/llc.cpp:577:41
+#18 0x000055a8df21b800 main /home/dylan/projects/llvm-project/llvm/tools/llc/llc.cpp:347:13
+#19 0x00007fa5f607ef4a __libc_start_main (/usr/lib/libc.so.6+0x20f4a)
+#20 0x000055a8df21aeea _start (./bin/llc+0x22eea)
+Stack dump:
+0.	Program arguments: ./bin/llc -march=avr -mcpu=atmega328p bugpoint-reduced-simplified.ll -debug -o /dev/null 
+1.	Running pass 'Function Pass Manager' on module 'bugpoint-reduced-simplified.ll'.
+2.	Running pass 'Post-RA pseudo instruction expansion pass' on function '@_ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E'

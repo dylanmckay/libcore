@@ -1,0 +1,27 @@
+Impossible reg-to-reg copy
+UNREACHABLE executed at /home/dylan/projects/llvm-project/llvm/lib/Target/AVR/AVRInstrInfo.cpp:75!
+#0 0x00007fd02d6f8cc6 llvm::sys::PrintStackTrace(llvm::raw_ostream&) /home/dylan/projects/llvm-project/llvm/lib/Support/Unix/Signals.inc:398:11
+#1 0x00007fd02d6f8ec9 PrintStackTraceSignalHandler(void*) /home/dylan/projects/llvm-project/llvm/lib/Support/Unix/Signals.inc:462:1
+#2 0x00007fd02d6f7260 llvm::sys::RunSignalHandlers() /home/dylan/projects/llvm-project/llvm/lib/Support/Signals.cpp:0:5
+#3 0x00007fd02d6f92ba SignalHandler(int) /home/dylan/projects/llvm-project/llvm/lib/Support/Unix/Signals.inc:0:3
+#4 0x00007fd02c5d6dd0 __restore_rt (/usr/lib/libpthread.so.0+0x11dd0)
+#5 0x00007fd02b958860 __GI_raise (/usr/lib/libc.so.6+0x34860)
+#6 0x00007fd02b959ec9 __GI_abort (/usr/lib/libc.so.6+0x35ec9)
+#7 0x00007fd02d5f71f0 llvm::install_out_of_memory_new_handler() /home/dylan/projects/llvm-project/llvm/lib/Support/ErrorHandling.cpp:193:0
+#8 0x00007fd032637599 llvm::AVRInstrInfo::copyPhysReg(llvm::MachineBasicBlock&, llvm::MachineInstrBundleIterator<llvm::MachineInstr, false>, llvm::DebugLoc const&, unsigned int, unsigned int, bool) const /home/dylan/projects/llvm-project/llvm/lib/Target/AVR/AVRInstrInfo.cpp:0:7
+#9 0x00007fd03004dd3b (anonymous namespace)::ExpandPostRA::LowerCopy(llvm::MachineInstr*) /home/dylan/projects/llvm-project/llvm/lib/CodeGen/ExpandPostRAPseudos.cpp:166:7
+#10 0x00007fd03004d189 (anonymous namespace)::ExpandPostRA::runOnMachineFunction(llvm::MachineFunction&) /home/dylan/projects/llvm-project/llvm/lib/CodeGen/ExpandPostRAPseudos.cpp:212:23
+#11 0x00007fd030230e61 llvm::MachineFunctionPass::runOnFunction(llvm::Function&) /home/dylan/projects/llvm-project/llvm/lib/CodeGen/MachineFunctionPass.cpp:62:8
+#12 0x00007fd02f76fdff llvm::FPPassManager::runOnFunction(llvm::Function&) /home/dylan/projects/llvm-project/llvm/lib/IR/LegacyPassManager.cpp:1520:27
+#13 0x00007fd02f770152 llvm::FPPassManager::runOnModule(llvm::Module&) /home/dylan/projects/llvm-project/llvm/lib/IR/LegacyPassManager.cpp:1541:16
+#14 0x00007fd02f7709b0 (anonymous namespace)::MPPassManager::runOnModule(llvm::Module&) /home/dylan/projects/llvm-project/llvm/lib/IR/LegacyPassManager.cpp:1597:27
+#15 0x00007fd02f770436 llvm::legacy::PassManagerImpl::run(llvm::Module&) /home/dylan/projects/llvm-project/llvm/lib/IR/LegacyPassManager.cpp:1700:16
+#16 0x00007fd02f770f21 llvm::legacy::PassManager::run(llvm::Module&) /home/dylan/projects/llvm-project/llvm/lib/IR/LegacyPassManager.cpp:1731:3
+#17 0x00005579e90cf34a compileModule(char**, llvm::LLVMContext&) /home/dylan/projects/llvm-project/llvm/tools/llc/llc.cpp:577:41
+#18 0x00005579e90cd800 main /home/dylan/projects/llvm-project/llvm/tools/llc/llc.cpp:347:13
+#19 0x00007fd02b944f4a __libc_start_main (/usr/lib/libc.so.6+0x20f4a)
+#20 0x00005579e90cceea _start (./bin/llc+0x22eea)
+Stack dump:
+0.	Program arguments: ./bin/llc -march=avr -mcpu=atmega328p bugpoint-reduced-simplified.ll -o /dev/null 
+1.	Running pass 'Function Pass Manager' on module 'bugpoint-reduced-simplified.ll'.
+2.	Running pass 'Post-RA pseudo instruction expansion pass' on function '@_ZN3lib3num7flt2dec8strategy5grisu22max_pow10_no_more_than17h83b3c65a945b5158E'
