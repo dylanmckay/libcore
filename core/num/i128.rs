@@ -14,4 +14,5 @@
 
 #![unstable(feature = "i128", issue="35118")]
 
+#[cfg(i128_type)]
 int_module! { i128, #[unstable(feature = "i128", issue="35118")] }

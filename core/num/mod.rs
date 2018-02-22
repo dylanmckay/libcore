@@ -1362,6 +1362,7 @@ impl i64 {
 }
 
 #[lang = "i128"]
+#[cfg(i128_type)]
 impl i128 {
     int_impl! { i128, i128, u128, 128, -170141183460469231731687303715884105728,
         170141183460469231731687303715884105727, "#![feature(i128_type)]
@@ -3044,6 +3045,7 @@ impl u64 {
 }
 
 #[lang = "u128"]
+#[cfg(i128_type)]
 impl u128 {
     uint_impl! { u128, u128, 128, 340282366920938463463374607431768211455, "#![feature(i128_type)]
 #![feature(i128)]
@@ -3211,7 +3213,10 @@ macro_rules! from_str_radix_int_impl {
         }
     )*}
 }
-from_str_radix_int_impl! { isize i8 i16 i32 i64 i128 usize u8 u16 u32 u64 u128 }
+from_str_radix_int_impl! { isize i8 i16 i32 i64 usize u8 u16 u32 u64 }
+
+#[cfg(i128_type)]
+from_str_radix_int_impl! { i128 u128 }
 
 /// The error type returned when a checked integral type conversion fails.
 #[unstable(feature = "try_from", issue = "33417")]
@@ -3328,11 +3333,13 @@ macro_rules! rev {
 try_from_upper_bounded!(u16, u8);
 try_from_upper_bounded!(u32, u16, u8);
 try_from_upper_bounded!(u64, u32, u16, u8);
+#[cfg(i128_type)]
 try_from_upper_bounded!(u128, u64, u32, u16, u8);
 
 try_from_both_bounded!(i16, i8);
 try_from_both_bounded!(i32, i16, i8);
 try_from_both_bounded!(i64, i32, i16, i8);
+#[cfg(i128_type)]
 try_from_both_bounded!(i128, i64, i32, i16, i8);
 
 // unsigned-to-signed
@@ -3340,17 +3347,29 @@ try_from_upper_bounded!(u8, i8);
 try_from_upper_bounded!(u16, i8, i16);
 try_from_upper_bounded!(u32, i8, i16, i32);
 try_from_upper_bounded!(u64, i8, i16, i32, i64);
+#[cfg(i128_type)]
 try_from_upper_bounded!(u128, i8, i16, i32, i64, i128);
 
 // signed-to-unsigned
-try_from_lower_bounded!(i8, u8, u16, u32, u64, u128);
-try_from_lower_bounded!(i16, u16, u32, u64, u128);
-try_from_lower_bounded!(i32, u32, u64, u128);
-try_from_lower_bounded!(i64, u64, u128);
+try_from_lower_bounded!(i8, u8, u16, u32, u64);
+#[cfg(i128_type)]
+try_from_lower_bounded!(i8, u128);
+try_from_lower_bounded!(i16, u16, u32, u64);
+#[cfg(i128_type)]
+try_from_lower_bounded!(i16, u128);
+try_from_lower_bounded!(i32, u32, u64);
+#[cfg(i128_type)]
+try_from_lower_bounded!(i32, u128);
+#[cfg(i128_type)]
+try_from_lower_bounded!(i64, u64);
+#[cfg(i128_type)]
+try_from_lower_bounded!(i64, u128);
+#[cfg(i128_type)]
 try_from_lower_bounded!(i128, u128);
 try_from_both_bounded!(i16, u8);
 try_from_both_bounded!(i32, u16, u8);
 try_from_both_bounded!(i64, u32, u16, u8);
+#[cfg(i128_type)]
 try_from_both_bounded!(i128, u64, u32, u16, u8);
 
 // usize/isize
@@ -3363,24 +3382,40 @@ mod ptr_try_from_impls {
     use convert::{Infallible, TryFrom};
 
     try_from_upper_bounded!(usize, u8);
-    try_from_unbounded!(usize, u16, u32, u64, u128);
+    try_from_unbounded!(usize, u16, u32, u64);
+    #[cfg(i128_type)]
+    try_from_unbounded!(usize, u128);
     try_from_upper_bounded!(usize, i8, i16);
-    try_from_unbounded!(usize, i32, i64, i128);
+    try_from_unbounded!(usize, i32, i64);
+    #[cfg(i128_type)]
+    try_from_unbounded!(usize, i128);
 
     try_from_both_bounded!(isize, u8);
-    try_from_lower_bounded!(isize, u16, u32, u64, u128);
+    try_from_lower_bounded!(isize, u16, u32, u64);
+    #[cfg(i128_type)]
+    try_from_lower_bounded!(isize, u128);
     try_from_both_bounded!(isize, i8);
-    try_from_unbounded!(isize, i16, i32, i64, i128);
+    try_from_unbounded!(isize, i16, i32, i64);
+    #[cfg(i128_type)]
+    try_from_unbounded!(isize, i128);
 
     rev!(try_from_unbounded, usize, u16);
-    rev!(try_from_upper_bounded, usize, u32, u64, u128);
+    rev!(try_from_upper_bounded, usize, u32, u64);
+    #[cfg(i128_type)]
+    rev!(try_from_upper_bounded, usize, u128);
     rev!(try_from_lower_bounded, usize, i8, i16);
-    rev!(try_from_both_bounded, usize, i32, i64, i128);
+    rev!(try_from_both_bounded, usize, i32, i64);
+    #[cfg(i128_type)]
+    rev!(try_from_both_bounded, usize, i128);
 
     rev!(try_from_unbounded, isize, u8);
-    rev!(try_from_upper_bounded, isize, u16, u32, u64, u128);
+    rev!(try_from_upper_bounded, isize, u16, u32, u64);
+    #[cfg(i128_type)]
+    rev!(try_from_upper_bounded, isize, u128);
     rev!(try_from_unbounded, isize, i16);
-    rev!(try_from_both_bounded, isize, i32, i64, i128);
+    rev!(try_from_both_bounded, isize, i32, i64);
+    #[cfg(i128_type)]
+    rev!(try_from_both_bounded, isize, i128);
 }
 
 #[cfg(target_pointer_width = "32")]
@@ -3389,24 +3424,38 @@ mod ptr_try_from_impls {
     use convert::{Infallible, TryFrom};
 
     try_from_upper_bounded!(usize, u8, u16);
-    try_from_unbounded!(usize, u32, u64, u128);
+    try_from_unbounded!(usize, u32, u64);
+    #[cfg(i128_type)]
+    try_from_unbounded!(usize, u128);
     try_from_upper_bounded!(usize, i8, i16, i32);
-    try_from_unbounded!(usize, i64, i128);
+    try_from_unbounded!(usize, i64);
+    #[cfg(i128_type)]
+    try_from_unbounded!(usize, i128);
 
     try_from_both_bounded!(isize, u8, u16);
-    try_from_lower_bounded!(isize, u32, u64, u128);
+    try_from_lower_bounded!(isize, u32, u64);
+    #[cfg(i128_type)]
+    try_from_lower_bounded!(isize, u128);
     try_from_both_bounded!(isize, i8, i16);
-    try_from_unbounded!(isize, i32, i64, i128);
+    try_from_unbounded!(isize, i32, i64);
+    #[cfg(i128_type)]
+    try_from_unbounded!(isize, i128);
 
     rev!(try_from_unbounded, usize, u16, u32);
-    rev!(try_from_upper_bounded, usize, u64, u128);
+    rev!(try_from_upper_bounded, usize, u64);
+    #[cfg(i128_type)]
+    rev!(try_from_upper_bounded, usize, u128);
     rev!(try_from_lower_bounded, usize, i8, i16, i32);
-    rev!(try_from_both_bounded, usize, i64, i128);
+    rev!(try_from_both_bounded, usize, i64);
+    #[cfg(i128_type)]
+    rev!(try_from_both_bounded, usize, i128);
 
     rev!(try_from_unbounded, isize, u8, u16);
     rev!(try_from_upper_bounded, isize, u32, u64, u128);
     rev!(try_from_unbounded, isize, i16, i32);
-    rev!(try_from_both_bounded, isize, i64, i128);
+    rev!(try_from_both_bounded, isize, i64);
+    #[cfg(i128_type)]
+    rev!(try_from_both_bounded, isize, i128);
 }
 
 #[cfg(target_pointer_width = "64")]
@@ -3417,21 +3466,26 @@ mod ptr_try_from_impls {
     try_from_upper_bounded!(usize, u8, u16, u32);
     try_from_unbounded!(usize, u64, u128);
     try_from_upper_bounded!(usize, i8, i16, i32, i64);
+    #[cfg(i128_type)]
     try_from_unbounded!(usize, i128);
 
     try_from_both_bounded!(isize, u8, u16, u32);
     try_from_lower_bounded!(isize, u64, u128);
     try_from_both_bounded!(isize, i8, i16, i32);
-    try_from_unbounded!(isize, i64, i128);
+    try_from_unbounded!(isize, i64);
+    #[cfg(i128_type)]
+    try_from_unbounded!(isize, i128);
 
     rev!(try_from_unbounded, usize, u16, u32, u64);
     rev!(try_from_upper_bounded, usize, u128);
     rev!(try_from_lower_bounded, usize, i8, i16, i32, i64);
+    #[cfg(i128_type)]
     rev!(try_from_both_bounded, usize, i128);
 
     rev!(try_from_unbounded, isize, u8, u16, u32);
     rev!(try_from_upper_bounded, isize, u64, u128);
     rev!(try_from_unbounded, isize, i16, i32, i64);
+    #[cfg(i128_type)]
     rev!(try_from_both_bounded, isize, i128);
 }
 
@@ -3467,7 +3521,10 @@ macro_rules! doit {
         }
     })*)
 }
-doit! { i8 i16 i32 i64 i128 isize u8 u16 u32 u64 u128 usize }
+doit! { i8 i16 i32 i64 isize u8 u16 u32 u64 usize }
+
+#[cfg(i128_type)]
+doit! { i128 u128 }
 
 fn from_str_radix<T: FromStrRadixHelper>(src: &str, radix: u32) -> Result<T, ParseIntError> {
     use self::IntErrorKind::*;
@@ -3602,38 +3659,50 @@ macro_rules! impl_from {
 impl_from! { u8, u16, #[stable(feature = "lossless_int_conv", since = "1.5.0")] }
 impl_from! { u8, u32, #[stable(feature = "lossless_int_conv", since = "1.5.0")] }
 impl_from! { u8, u64, #[stable(feature = "lossless_int_conv", since = "1.5.0")] }
+#[cfg(i128_type)]
 impl_from! { u8, u128, #[unstable(feature = "i128", issue = "35118")] }
 impl_from! { u8, usize, #[stable(feature = "lossless_int_conv", since = "1.5.0")] }
 impl_from! { u16, u32, #[stable(feature = "lossless_int_conv", since = "1.5.0")] }
 impl_from! { u16, u64, #[stable(feature = "lossless_int_conv", since = "1.5.0")] }
+#[cfg(i128_type)]
 impl_from! { u16, u128, #[unstable(feature = "i128", issue = "35118")] }
 impl_from! { u32, u64, #[stable(feature = "lossless_int_conv", since = "1.5.0")] }
+#[cfg(i128_type)]
 impl_from! { u32, u128, #[unstable(feature = "i128", issue = "35118")] }
+#[cfg(i128_type)]
 impl_from! { u64, u128, #[unstable(feature = "i128", issue = "35118")] }
 
 // Signed -> Signed
 impl_from! { i8, i16, #[stable(feature = "lossless_int_conv", since = "1.5.0")] }
 impl_from! { i8, i32, #[stable(feature = "lossless_int_conv", since = "1.5.0")] }
 impl_from! { i8, i64, #[stable(feature = "lossless_int_conv", since = "1.5.0")] }
+#[cfg(i128_type)]
 impl_from! { i8, i128, #[unstable(feature = "i128", issue = "35118")] }
 impl_from! { i8, isize, #[stable(feature = "lossless_int_conv", since = "1.5.0")] }
 impl_from! { i16, i32, #[stable(feature = "lossless_int_conv", since = "1.5.0")] }
 impl_from! { i16, i64, #[stable(feature = "lossless_int_conv", since = "1.5.0")] }
+#[cfg(i128_type)]
 impl_from! { i16, i128, #[unstable(feature = "i128", issue = "35118")] }
 impl_from! { i32, i64, #[stable(feature = "lossless_int_conv", since = "1.5.0")] }
+#[cfg(i128_type)]
 impl_from! { i32, i128, #[unstable(feature = "i128", issue = "35118")] }
+#[cfg(i128_type)]
 impl_from! { i64, i128, #[unstable(feature = "i128", issue = "35118")] }
 
 // Unsigned -> Signed
 impl_from! { u8, i16, #[stable(feature = "lossless_int_conv", since = "1.5.0")] }
 impl_from! { u8, i32, #[stable(feature = "lossless_int_conv", since = "1.5.0")] }
 impl_from! { u8, i64, #[stable(feature = "lossless_int_conv", since = "1.5.0")] }
+#[cfg(i128_type)]
 impl_from! { u8, i128, #[unstable(feature = "i128", issue = "35118")] }
 impl_from! { u16, i32, #[stable(feature = "lossless_int_conv", since = "1.5.0")] }
 impl_from! { u16, i64, #[stable(feature = "lossless_int_conv", since = "1.5.0")] }
+#[cfg(i128_type)]
 impl_from! { u16, i128, #[unstable(feature = "i128", issue = "35118")] }
 impl_from! { u32, i64, #[stable(feature = "lossless_int_conv", since = "1.5.0")] }
+#[cfg(i128_type)]
 impl_from! { u32, i128, #[unstable(feature = "i128", issue = "35118")] }
+#[cfg(i128_type)]
 impl_from! { u64, i128, #[unstable(feature = "i128", issue = "35118")] }
 
 // Note: integers can only be represented with full precision in a float if

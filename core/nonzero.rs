@@ -54,9 +54,12 @@ impl_zeroable_for_pointer_types! {
 }
 
 impl_zeroable_for_integer_types! {
-    usize u8 u16 u32 u64 u128
-    isize i8 i16 i32 i64 i128
+    usize u8 u16 u32 u64
+    isize i8 i16 i32 i64
 }
+
+#[cfg(i128_type)]
+impl_zeroable_for_integer_types! { u128 i128 }
 
 /// A wrapper type for raw pointers and integers that will never be
 /// NULL or 0 that might allow certain optimizations.
