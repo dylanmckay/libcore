@@ -74,7 +74,10 @@
 #![feature(const_fn)]
 #![feature(custom_attribute)]
 #![feature(fundamental)]
-#![feature(i128_type)]
+// AVR: 128-bit integers are not supported.
+// https://github.com/avr-rust/rust/issues/94
+#![cfg_attr(not(target_arch = "avr"), feature(i128_type))]
+
 #![feature(inclusive_range_syntax)]
 #![feature(intrinsics)]
 #![feature(lang_items)]
