@@ -10,11 +10,13 @@
 
 use fmt::{Formatter, Result, LowerExp, UpperExp, Display, Debug};
 use mem;
+#[cfg(not(target_arch = "avr"))]
 use num::flt2dec;
 
 // Don't inline this so callers don't use the stack space this function
 // requires unless they have to.
 #[inline(never)]
+#[cfg(not(target_arch = "avr"))]
 fn float_to_decimal_common_exact<T>(fmt: &mut Formatter, num: &T,
                                     sign: flt2dec::Sign, precision: usize) -> Result
     where T: flt2dec::DecodableFloat

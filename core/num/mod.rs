@@ -91,8 +91,11 @@ impl<T: fmt::UpperHex> fmt::UpperHex for Wrapping<T> {
 mod wrapping;
 
 // All these modules are technically private and only exposed for coretests:
+#[cfg(not(target_arch = "avr"))]
 pub mod flt2dec;
+#[cfg(not(target_arch = "avr"))]
 pub mod dec2flt;
+#[cfg(not(target_arch = "avr"))]
 pub mod bignum;
 pub mod diy_float;
 
@@ -3577,6 +3580,7 @@ impl fmt::Display for ParseIntError {
 }
 
 #[stable(feature = "rust1", since = "1.0.0")]
+#[cfg(not(target_arch = "avr"))]
 pub use num::dec2flt::ParseFloatError;
 
 // Conversion traits for primitive integer and float types
